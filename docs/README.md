@@ -49,17 +49,16 @@ Task 1)- Create infra structure
 Task 2) - provision the softwares in instances
 
             - In Webservers,
-					
-                    - install tomcat 1.7
+			- install tomcat 1.7
               
             - In Jenkins build server,
-				- install jenkins
-				- install git latest
-       		    - install maven	
-			- In Docker server,
+	        	- install jenkins
+			- install git latest
+       		        - install maven	
+	    - In Docker server,
                 - create containers
-                    - sonaqube-container
-					- nexus-container
+                        - sonaqube-container
+		        - nexus-container
 					
 Task 3)	Implement CI/CD 
 
