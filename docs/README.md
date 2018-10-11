@@ -40,7 +40,7 @@ Task 1)- Create infra structure
    			- clone git repo
 			- run shell script to install ansible
                      
-            - 1 for Docker server
+             - 1 for Docker server
 			Name:
 			    - Docker-server
 			Type:
@@ -57,7 +57,9 @@ Task 2) - provision the softwares in instances
        		        - install maven	
 			
 	    - In Docker server,
-                - create containers
+	    
+                 - create containers
+		 
                         - sonaqube-container
 		        - nexus-container
 					
