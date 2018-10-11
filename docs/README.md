@@ -2,12 +2,14 @@ Project: Devops and AWS
 
 UserStory: Host the MyWeb Application
 Tasks: 
+
     - Create infra structure
     - provision the softwares
     - implement the CI/CD
     
 
 Pre-requesites: 
+
         - aws account
         - github account
         - dockerhub account
