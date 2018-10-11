@@ -41,14 +41,15 @@ Task 1)- Create infra structure
 			- run shell script to install ansible
                      
             - 1 for Docker server
-		Name:
-                    - Docker-server
-		Type:
-		    - t2.small,vCPU-1,Memory(GiB)-2
+			Name:
+			    - Docker-server
+			Type:
+			    - t2.small,vCPU-1,Memory(GiB)-2
+			    
 Task 2) - provision the softwares in instances
 
             - In Webservers,
-					- install open jdk 1.8
+					
                     - install tomcat 1.7
               
             - In Jenkins build server,
