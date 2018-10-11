@@ -26,15 +26,15 @@ Task 1)- Create infra structure
                      - t2.medium
    	          
             - 1 for jenkins build server
-	        Name:                
-		 - jenkins-server 
-		Type:
-		 - t2.medium
+			Name:                
+			 - jenkins-server 
+			Type:
+			 - t2.medium
             - 1 for ansible controll m/c
-		Name:                
-		 - ansible-controller 
-		Type:
-		 - t2.medium
+			Name:                
+			 - ansible-controller 
+			Type:
+			 - t2.medium
                   
       		- Here, pass userdata to
    			- clone git repo
