@@ -1,4 +1,4 @@
-Project:	<h1>  Devops and AWS <h1>
+Project:	Devops and AWS 
 
 UserStory:  	Host the MyWeb Application
 
