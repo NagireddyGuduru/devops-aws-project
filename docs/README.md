@@ -58,9 +58,8 @@ Task 2) - provision the softwares in instances
 			
 	    - In Docker server,
 	    
-	  	 - Install docker
-	    
-                 - create containers		
+		  - Install docker
+		  - create containers		
 		 
 				- sonaqube-container
 				- nexus-container
