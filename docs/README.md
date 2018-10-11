@@ -55,6 +55,7 @@ Task 2) - provision the softwares in instances
 	        	- install jenkins
 			- install git latest
        		        - install maven	
+			
 	    - In Docker server,
                 - create containers
                         - sonaqube-container
