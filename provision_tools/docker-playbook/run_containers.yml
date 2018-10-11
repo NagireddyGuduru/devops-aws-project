@@ -1,0 +1,8 @@
+---
+ - hosts: docker
+   tasks:
+    - name: run nexus container
+      include_vars: nexus.yml
+    - name: run sonarqube container
+      include_vars: sonarqube.yml 
+      

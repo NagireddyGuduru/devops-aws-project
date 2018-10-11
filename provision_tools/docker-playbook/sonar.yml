@@ -1,0 +1,5 @@
+image: sonarqube
+name: sonarqube-container
+src_port: 9000
+dest_port: 9000
+privileged: true

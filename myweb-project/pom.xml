@@ -1,0 +1,129 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>in.mphasis</groupId>
+	<artifactId>DevOpsDemoProject</artifactId>
+	<packaging>war</packaging>
+	<version>20.0.4-SNAPSHOT</version>
+	<name>DevOps Demo Project</name>
+	<url>http://maven.apache.org</url>
+	
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.sonarsource.java</groupId>
+		  <artifactId>sonar-jacoco-listeners</artifactId>
+		  <version>3.8</version>
+		  <scope>test</scope>
+		</dependency>
+	</dependencies>
+	<distributionManagement>
+        <repository>
+            <id>deployment</id>
+            <name>Internal Releases</name>
+            <url>http://172.20.15.101:8087/nexus/content/repositories/releases/</url>
+			<uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+            <id>deployment</id>
+            <name>Internal Snapshot Releases</name>
+                     <url>http://172.20.15.101:8087/nexus/content/repositories/snapshots/</url>
+			<uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+	<build>
+		<finalName>myweb</finalName>
+		<plugins>
+		<plugin>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>				    
+		</plugin>
+		 <!-- for version update and code release required this plugin -->	
+		<plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-release-plugin</artifactId>
+		  <version>2.5.2</version>
+		</plugin>
+			<plugin>
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <version>2.2</version>
+				 <configuration>
+                    <server>apache-tomcat-7</server>
+                    <url>http://172.20.15.101:8088/manager/text</url>
+                    <path>/${project.artifactId}</path>
+			<username>tomcat</username>
+			<password>tomcat</password>
+                </configuration>
+        </plugin>
+			
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+            </plugin>
+			 <plugin>
+      <groupId>org.sonarsource.scanner.maven</groupId>
+      <artifactId>sonar-maven-plugin</artifactId>
+      <version>3.2</version>
+  </plugin>
+		</plugins>
+	</build>
+	  <properties>
+            <project.scm.id>git</project.scm.id>
+	    <maven.tomcat.url>http://172.20.15.101:8088/manager/text</maven.tomcat.url>
+         </properties>
+	  <scm>
+		<url>https://github.com/NagireddyGuduru/client-demo-project</url>
+		<connection>scm:git:https://github.com/NagireddyGuduru/client-demo-project.git</connection>
+		<developerConnection>scm:git:https://github.com/NagireddyGuduru/client-demo-project.git</developerConnection>
+	    <tag>HEAD</tag>
+  </scm>
+	<profiles>
+	  <profile>
+      <id>coverage-per-test</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <!-- Minimal supported version is 2.4 -->
+            <version>2.13</version>
+            <configuration>
+              <properties>
+                <property>
+                  <name>listener</name>
+                  <value>org.sonar.java.jacoco.JUnitListener</value>
+                </property>
+              </properties>
+              <testFailureIgnore>true</testFailureIgnore>
+            </configuration>
+          </plugin>
+		
+        </plugins>
+      </build>
+
+      <dependencies>
+        <dependency>
+          <groupId>org.sonarsource.java</groupId>
+          <artifactId>sonar-jacoco-listeners</artifactId>
+          <version>3.8</version>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+    </profile>	
+	</profiles>
+	
+</project>

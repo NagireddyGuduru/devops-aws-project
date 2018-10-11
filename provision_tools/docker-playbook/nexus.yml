@@ -1,0 +1,5 @@
+image: sonatype/nexus:oss
+name: nexus-container
+src_port: 8082
+dest_port: 8081
+privileged: true
