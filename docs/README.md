@@ -58,7 +58,7 @@ Task 2) - provision the softwares in instances
 			
 	    - In Docker server,
 	    
-	         - Install docker
+	  	 - Install docker
 	    
                  - create containers		
 		 
