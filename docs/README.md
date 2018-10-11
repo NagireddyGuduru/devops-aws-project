@@ -15,8 +15,8 @@ Pre-requesites:
         - dockerhub account
 
 Task 1)- Create infra structure
-Description:
-       - Install and configure terraform
+
+            
        - Create 5 instances
             - 2 for webservers
                 Name:  
@@ -60,7 +60,9 @@ Task 2) - provision the softwares in instances
 					- nexus-container
 					
 Task 3)	Implement CI/CD 
+
               - Create a pipeline script to,
+	      
 				- build source code
 				- code analysis, code coverage
 				- upload artifacts into nexus
