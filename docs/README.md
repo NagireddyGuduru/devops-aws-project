@@ -1,6 +1,7 @@
 Project: Devops and AWS 
 
 UserStory: Host the MyWeb Application
+
 Tasks: 
 
     - Create infra structure
