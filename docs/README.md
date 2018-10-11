@@ -58,12 +58,11 @@ Task 2) - provision the softwares in instances
 			
 	    - In Docker server,
 	    
-                 - create containers
-		 
+                 - create containers		 
                         - sonaqube-container
 		        - nexus-container
 					
-Task 3)	Implement CI/CD 
+Task 3)	- Implement CI/CD for the application
 
               - Create a pipeline script to,
 	      
