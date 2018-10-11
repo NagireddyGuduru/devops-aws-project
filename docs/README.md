@@ -1,6 +1,6 @@
-Project: Devops and AWS 
+Project:	<h1>  Devops and AWS <h1>
 
-UserStory: Host the MyWeb Application
+UserStory:  	Host the MyWeb Application
 
 Tasks: 
 
