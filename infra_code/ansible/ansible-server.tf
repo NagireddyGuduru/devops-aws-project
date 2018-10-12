@@ -5,6 +5,7 @@ resource "aws_instance" "ansible" {
   ami           = "${var.ansible_ami}"
   instance_type = "${var.ansible_instance_type}"
   key_name = "${var.ansible_key_name}"
+  user_data = "${file("install_ansible.sh")}"
 
   tags {
     Name = "ansible-controll-machine"
