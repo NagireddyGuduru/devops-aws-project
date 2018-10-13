@@ -17,15 +17,15 @@
          groups: 
            - tomcat
            - root  
-         home: /usr/share/tomcat
+             #         home: /usr/share/tomcat
     - name: Download tomcat archive
       get_url:
          url: http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz
          dest: /opt/apache-tomcat-7.0.61.tar.gz
     - name: Extract tar file
-      command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-7.0.61.tar.gz -C /opt/ creates=/usr/share/tomcat
+      command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-7.0.61.tar.gz -C /opt/
     - name: Symlink install directory
-      file: src=/opt/apache-tomcat-7.0.61 path=/usr/share/tomcat state=link
+      file: src=/opt/apache-tomcat-7.0.61 dest=/usr/share/tomcat state=link force=true owner=tomcat group=tomcat mode=0644
     
     - name: Change ownership of Tomcat installation
       file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
