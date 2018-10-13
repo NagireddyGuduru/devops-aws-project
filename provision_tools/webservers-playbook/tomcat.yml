@@ -24,29 +24,16 @@
          dest: /opt/apache-tomcat-7.0.61.tar.gz
     - name: Extract tar file
       command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-7.0.61.tar.gz -C /opt/ creates=/usr/share/tomcat
-      #- name: Symlink install directory
-      #file: src=/opt/apache-tomcat-7.0.61 path=/usr/share/tomcat state=link
+    - name: Symlink install directory
+      file: src=/opt/apache-tomcat-7.0.61 path=/usr/share/tomcat state=link
     
     - name: Change ownership of Tomcat installation
       file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
-      
-    - name: Configure Tomcat server
-      template: src=server.xml dest=/usr/share/tomcat/conf/
-      notify: restart tomcat
-
-    - name: Configure Tomcat users
-      template: src=tomcat-users.xml dest=/usr/share/tomcat/conf/
-      notify: restart tomcat  
 
     - name: Configure Tomcat as a service
       copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755  
-      
     - name: Start the tomcat
       service:
          name: tomcat
          state: started
          enabled: yes
-handlers:
-    - name: restart tomcat
-      service: name=tomcat state=started
-         
