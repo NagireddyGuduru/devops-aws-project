@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>in.mphasis</groupId>
+	<groupId>in.javahome</groupId>
 	<artifactId>DevOpsDemoProject</artifactId>
 	<packaging>war</packaging>
-	<version>20.0.4-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>DevOps Demo Project</name>
 	<url>http://maven.apache.org</url>
 	
@@ -33,13 +33,13 @@
         <repository>
             <id>deployment</id>
             <name>Internal Releases</name>
-            <url>http://172.20.15.101:8087/nexus/content/repositories/releases/</url>
+            <url>http://172.31.45.21:8081/nexus/content/repositories/releases/</url>
 			<uniqueVersion>false</uniqueVersion>
         </repository>
         <snapshotRepository>
             <id>deployment</id>
             <name>Internal Snapshot Releases</name>
-                     <url>http://172.20.15.101:8087/nexus/content/repositories/snapshots/</url>
+                     <url>http://172.31.45.21:8081/nexus/content/repositories/snapshots/</url>
 			<uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>

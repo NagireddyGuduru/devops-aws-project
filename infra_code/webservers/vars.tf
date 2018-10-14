@@ -1,11 +1,18 @@
-var "jenkins_ami" {
- default = "ami-a0cfeed8"
+variable "qa_servers_ami" {
+  type = "map"
+
+  default = {
+    us-west-2  = "ami-a0cfeed8"
+    ap-south-1 = "ami-00b6a8a2bd28daf19"
+  }
 }
 
-var "jenkins_instance_type" {
- default = "t2.micro"
+variable "count" {
+  default = 2
 }
 
-var "jenkins_key_name" {
- default = "microscanner"
+provider "aws" {
+  region = "${var.region}"
 }
+
+variable "region" {}
