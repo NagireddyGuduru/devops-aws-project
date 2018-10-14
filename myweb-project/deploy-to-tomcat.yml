@@ -7,6 +7,9 @@
      - nexus_pwd: admin123
      - war_version: 1.0.0
   tasks:
+    - name: Install lxml for nexus
+      pip:
+        name: lxml   
     - name: Download war file from Nexus
       maven_artifact:
          group_id: in.javahome
