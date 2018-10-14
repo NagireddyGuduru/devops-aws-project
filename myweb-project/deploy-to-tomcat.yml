@@ -2,14 +2,26 @@
 - hosts: tomcat
   become: True
   vars:
-     - nexus_url: http://172.31.38.82:8081/nexus/content/repositories/releases/
+     - nexus_url: http://172.31.45.21:8081/nexus/content/repositories/releases/
      - nexus_user: admin
      - nexus_pwd: admin123
-     - war_version: 1.0.0
+     - war_version: 0.16.0
   tasks:
     - name: Install lxml for nexus
       pip:
         name: lxml   
+    - name: remove old war file
+      debug:
+         msg: "deploying {{war_version}}"
+
+    - name: Remove old files
+      file:
+         path:  "{{item}}"
+         state: absent
+      with_items:
+           - /opt/apache-tomcat-7.0.61/webapps/myweb.war
+           - /opt/apache-tomcat-7.0.61/webapps/myweb
+     
     - name: Download war file from Nexus
       maven_artifact:
          group_id: in.javahome
