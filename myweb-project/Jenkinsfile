@@ -1,21 +1,33 @@
-node{
-    def mvnHome = tool name: 'maven3', type: 'maven'
-    def mvnCmd = "${mvnHome}/bin/mvn"
+try{
+	node{
+	    properties([parameters([choice(choices: ['master', 'dev', 'qa', 'staging'], description: 'Choose branch to build and deploy', name: 'gitBranch')]), pipelineTriggers([pollSCM('')])])
     stage('Git Checkout'){
-        git 'https://github.com/javahometech/my-app'
-    }
-    stage('Create Package'){
-        sh "${mvnCmd} clean package"
-    }
-     stage('Upload War To Nexus'){
-         sh "${mvnCmd} deploy"
-    }
-    stage('Run Ansible Deploy Playbook'){
-        // Connect to Ansible Control Machine
-        sshagent(['ansible-cm']) {
-           def playbookCmd = 'ansible-playbook -i /home/ubuntu/ansible-3tier/dev-inventory  /home/ubuntu/ansible-3tier/deploy-to-tomcat.yml -e war_version=0.0.3'
-           sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.28.161 ${playbookCmd}"
-        }
-    }
-    
+		git credentialsId: 'github', 
+		    url: 'https://github.com/javahometech/my-app',
+			branch: "${params.gitBranch}"
+	}
+	
+	stage('Maven Build'){
+		sh 'mvn clean package'
+	}
+	stage('Deploy to Dev'){
+		sh 'mv target/*.war target/myweb.war'
+		sshagent(['tomcat-dev']) {
+			sh 'ssh ec2-user@172.31.17.196 rm -rf /opt/tomcat8/webapps/myweb*'
+		    sh 'scp target/myweb.war ec2-user@172.31.17.196:/opt/tomcat8/webapps/'
+		    sh 'ssh ec2-user@172.31.17.196 sudo service tomcat restart'
+		}
+	    slackSend channel: '#devops-2',
+				  color: 'good',
+				  message: "Job -  ${env.JOB_NAME}, Completed successfully Build URL is ${env.BUILD_URL}"
+
+
+	}
+}
+
+}catch(error){
+  slackSend channel: '#devops-2',
+				  color: 'danger',
+				  message: "Job -  ${env.JOB_NAME}, Failed, Build URL is ${env.BUILD_URL}"
+   error 'Something wrong'
 }
