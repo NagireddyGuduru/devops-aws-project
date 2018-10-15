@@ -26,22 +26,24 @@ vi /etc/init.d/sonar
 
 /usr/bin/sonar $*
 
-step 6:
+:wq!
+
+### step 6:
 
 ln -s /opt/sonarqube-7.3/bin/linux-x86-64/sonar.sh /usr/bin/sonar
 
 verify link created or not
 ls -ltr /usr/bin/sonar
 
-step 7:
+### step 7:
 
 chmod 755 /etc/init.d/sonar
 
 
-step 8:
+###  step 8:
 reboot
 
-step 9:
+### step 9:
 sudo service sonar status
 sudo service sonar start
 sudo service sonar stop
