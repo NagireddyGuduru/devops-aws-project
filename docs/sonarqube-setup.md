@@ -23,6 +23,7 @@ Create a file /etc/init.d/sonar and copy the following content on to the file.
 vi /etc/init.d/sonar
 
 #!/bin/sh
+
 /usr/bin/sonar $*
 
 step 6:
