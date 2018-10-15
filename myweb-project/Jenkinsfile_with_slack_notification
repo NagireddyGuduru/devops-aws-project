@@ -1,0 +1,23 @@
+node{
+    def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
+    def mvnCmd = "${mvnHome}/bin/mvn"
+    stage('Git Checkout'){
+        git 'https://github.com/NagireddyGuduru/my-app.git'
+    }
+    stage('Create Package'){
+        sh "${mvnCmd} clean package"
+    }
+     stage('Upload War To Nexus'){
+         sh "${mvnCmd} deploy"
+    }
+    stage('Run Ansible Deploy Playbook'){
+        // Connect to Ansible Control Machine
+        pom = readMavenPom file: 'pom.xml'
+        
+       sshagent(['ansible-server-cred']) {
+          def playbookCmd = "sudo ansible-playbook /home/ubuntu/devops-aws-project/myweb-project/deploy-to-tomcat.yml -e war_version=${pom.version}"
+          sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.38.82 ${playbookCmd}"
+        }
+    }
+
+}

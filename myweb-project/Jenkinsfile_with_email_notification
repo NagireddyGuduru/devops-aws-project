@@ -1,0 +1,68 @@
+node{
+    def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
+    def mvnCmd = "${mvnHome}/bin/mvn"
+    stage('Git Checkout'){
+        git 'https://github.com/NagireddyGuduru/my-app.git'
+    }
+    stage('Create Package'){
+	  try {
+        sh "${mvnCmd} clean package"
+		} catch (e) {
+			 currentBuild.result = "FAILED"
+			 notifyFailed()
+			 throw e
+			}
+        
+    }
+     stage('Upload War To Nexus'){
+	    try {
+          sh "${mvnCmd} deploy"
+         } catch (e) {
+			 currentBuild.result = "FAILED"
+			 notifyFailed()
+			 throw e
+			}
+        
+    }
+    stage('Run Ansible Deploy Playbook'){
+        // Connect to Ansible Control Machine
+        try {
+        pom = readMavenPom file: 'pom.xml'
+        
+       sshagent(['ansible-server-cred']) {
+          def playbookCmd = "sudo ansible-playbook /home/ubuntu/devops-aws-project/myweb-project/deploy-to-tomcat.yml -e war_version=${pom.version}"
+          sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.38.82 ${playbookCmd}"
+       } } catch (e) {
+            currentBuild.result = "FAILED"
+			 notifyFailed()
+			 throw e
+       }
+       
+    }
+  stage('Email Notification'){
+       currentBuild.result = "SUCCESS"
+       notifySuccessful()
+   }
+}
+   def notifySuccessful() {
+    mail bcc: '', body: '''Hi Team,
+          Application Has been deployed in QA environment successfully.
+
+		  Please validate and revert it back with results
+
+			Thanks,
+			CI/CD Engineer
+Note: this is auto generated mail.''', cc: 'nagireddy.guduru@gmail.com', from: '', replyTo: '', subject: 'QA Deployment - SUCCESS', to: 'javahome.devops.practice@gmail.com'
+   
+   }
+   def notifyFailed() {
+    mail bcc: '', body: '''Hi Team,
+         Build and Deploymet failed.
+          Please have look ASAP.
+				
+
+			Thanks,
+			CI/CD Engineer
+     Note: this is auto generated mail.''', cc: 'nagireddy.guduru@gmail.com', from: '', replyTo: '', subject: 'QA Deployment - FAILED', to: 'javahome.devops.practice@gmail.com'
+   
+}
