@@ -17,7 +17,7 @@ step 4:
 
 chown -R ec2-user:ec2-user sonarqube-7.3/
 
-###step 5:
+### step 5:
 Create a file /etc/init.d/sonar and copy the following content on to the file.
 
 vi /etc/init.d/sonar
