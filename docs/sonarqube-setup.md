@@ -2,6 +2,10 @@
 SonarQube Installation on Ec2 Linux
 ************************************
 
+yum update -y
+
+yum install java-1.8.0-openjdk.x86_64 -y
+
 step 1:
 sudo su
 cd /opt/
