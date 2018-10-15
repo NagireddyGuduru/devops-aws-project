@@ -46,7 +46,7 @@ ls -ltr /usr/bin/sonar
 
 chmod 755 /etc/init.d/sonar
 
-
+chkconfig --add sonar
 ###  step 8:
 reboot
 
