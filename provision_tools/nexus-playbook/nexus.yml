@@ -1,0 +1,59 @@
+---
+- hosts: tomcat
+  remote_user: root
+  become_method: sudo
+  become: yes
+  tasks:
+    - name: upgrade all packages
+      yum:
+       name: *
+       state: latest
+           
+    - name: Install java8
+      yum:
+        name: java-1.8.0-openjdk
+        state: present
+        
+    - name: Create app directory
+      file: path=/app state=directory
+    
+    - name: Go to app folder
+      command: chdir=/app/
+    
+    - name: Download nexus archive
+      get_url:
+         url: https://sonatype-download.global.ssl.fastly.net/nexus/3/nexus-3.0.2-02-unix.tar.gz
+         dest: /app/
+         
+    - name: Extract tar file
+      unarchive:
+       src: /app/nexus-3.0.2-02-unix.tar.gz
+       dest: /app
+       remote_src: yes
+
+    - name: Move nexus-3.0.2-02 folder to nexus folder
+      command: mv nexus-3.0.2-02 nexus
+      when: foo_stat.stat.exists
+        
+    - name: Create Linux User for nexus
+      user:
+         name: nexus
+         groups: 
+           - nexus
+           - root  
+           
+    - name: Change ownership of nexus installation
+      file: path=/app/nexus owner=nexus group=nexus state=directory recurse=yes  
+           
+    - name: Symlink install directory
+      file: src=/opt/apache-tomcat-7.0.61 dest=/usr/share/tomcat state=link force=true owner=tomcat group=tomcat mode=0644
+    
+   
+
+    - name: Configure Tomcat as a service
+      copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755  
+    - name: Start the tomcat
+      service:
+         name: tomcat
+         state: started
+         enabled: yes
