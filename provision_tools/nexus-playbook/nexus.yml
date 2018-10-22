@@ -43,13 +43,14 @@
            - root  
            
     - name: Change ownership of nexus installation
-      file: path=/app/nexus owner=nexus group=nexus state=directory recurse=yes  
-           
+      file: path=/app/nexus owner=nexus group=nexus state=directory recurse=yes 
+
+    - name: copy nexus.rc file
+          
+    
     - name: Symlink install directory
       file: src=/opt/apache-tomcat-7.0.61 dest=/usr/share/tomcat state=link force=true owner=tomcat group=tomcat mode=0644
     
-   
-
     - name: Configure Tomcat as a service
       copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755  
     - name: Start the tomcat

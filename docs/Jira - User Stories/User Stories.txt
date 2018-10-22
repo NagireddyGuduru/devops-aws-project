@@ -1,0 +1,62 @@
+Project : MyWeb-App
+
+MyDashboard Link: https://********.atlassian.net/secure/Dashboard.jspa
+Main Acct: https://id.atlassian.com/
+
+Backlogs:
+
+1)[MyWeb-App]- Create Infra structure for MyWeb-App
+  SubTasks:
+         1) Setup Terraform 
+		 2) Write a Terraform code to create infra sturcuture
+		       - 2 webservers - tomcat
+			   - ci server - jenkins
+			   - container mgmt server - docker
+			   - configuration mgmt server - ansible
+			   - continuous inspection server - sonarqube
+			   - artifactory mgmt server - Nexus
+
+2)[MyWeb-App]- Provision the Softwares for MyWeb-App
+   SubTasks:
+       1) Setup ansible controll m/c
+	   2) write a playbook to,
+	         - Install 2 webservers
+			 - Install Jenkins CI server
+			 - Install Docker server
+			 - Install SonarQube server
+			 - Install Nexus server
+			 
+
+3) [MyWeb-App]- Implement CI/CD for MyWeb-App
+   SubTasks:
+      1) Write a pipeline script to deploy application
+	      
+
+4) [MyWeb-App]- Configure the loadbalancer for the QA servers
+    SubTasks:
+	    1) Setup LoadBalancer using AWS ELB service
+		
+
+5) [MyWeb-App]- Enable Detailed monitoring for all instances
+    SubTasks:
+	    1) Enable Detailed monitoring using AWS CloudWatch service.
+
+6) [MyWeb-App]- Enable the log monitoring
+    SubTasks:
+	   1) Enable Log monitoring using AWS cloud trail service.
+
+7) [MyWeb-App]- Take the backup of CI/CD (Jenkins server backup)
+    SubTasks:
+	   1) Create a EBS volume and mount with jenkins workspace.
+	   
+	   
+	   
+	   
+
+
+
+
+
+
+
+   
