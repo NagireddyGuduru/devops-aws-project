@@ -23,18 +23,18 @@
                 Name:  
 		     - qa-server-1,qa-server-2
                 Type:
-                     - t2.medium
+                     - t2.micro
 
             - 1 for jenkins build server
 			Name:                
 			 - jenkins-server
 			Type:
-			 - t2.medium
+			 - t2.small
             - 1 for ansible controll m/c
 			Name:                
 			 - ansible-controller
 			Type:
-			 - t2.medium
+			 - t2.micro
 
       		- Here, pass userdata to
    			- clone git repo
